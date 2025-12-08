@@ -11,7 +11,7 @@
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+font pango:monospace 15
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -190,14 +190,15 @@ bar {
 bindsym Mod4+F9 exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
 # audio buttons
 # F10 incase audio raise button doesn't exist
-bindsym Mod4+F10 exec amixer -D pulse set Master 5%+
-bindsym XF86AudioRaiseVolume exec amixer -D pulse set Master 5%+
+bindsym Mod4+F10 exec pamixer -d 5
+bindsym XF86AudioRaiseVolume exec pamixer -d 5
 # F11 incase audio lower does not exist
-bindsym Mod4+F11 exec amixer -D pulse set Master 5%-
-bindsym XF86AudioLowerVolume exec amixer -D pulse set Master 5%-
+bindsym Mod4+F11 exec pamixer -i 5
+bindsym XF86AudioLowerVolume exec pamixer -i 5
 # F12 incase audio mute does not exist
-bindsym Mod4+F12 exec amixer -D pulse set Master 1+ toggle
-bindsym XF86AudioMute exec amixer -D pulse set Master 1+ toggle
+bindsym Mod4+F12 exec pamixer -t
+bindsym XF86AudioMute exec pamixer -t
+
 bindsym Mod4+F1 exec i3lock -i $HOME/Pictures/Wallpapers/CurrentWallPaper.png -t
 exec --no-startup-id feh --bg-fill $HOME/Pictures/Desktop/CurrentDesktop.jpg
 focus_follows_mouse no
@@ -231,3 +232,8 @@ bindsym Mod4+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
 # Please remove the following exec line:
 #######################################################################
 exec i3-config-wizard
+exec picom -b
+exec tilda -h
+exec optimus-manager-qt
+exec nm-applet
+exec pasystray
